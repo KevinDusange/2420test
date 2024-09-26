@@ -1,11 +1,11 @@
-# Creating a remote server using DigitalOcean
+# Creating DigitalOcean Arch Linux Server using doctl
 
-## Steps
+## In this tutorial you will:
 
-1. Create SSH Keys
-2. Add a custom Arch Linux img
-3. Create a droplet running Arch Linux
-4. Connect to your droplet using SSH
+1. Create SSH Keys on your local machine
+2. Install and configure doctl
+3. Create a cloud-init.yaml file
+4. Create a droplet using doctl 
 
 ## Step 1
 
@@ -14,3 +14,4 @@
 ## Step 3
 
 ## Step 4
+
