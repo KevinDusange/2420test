@@ -1,4 +1,4 @@
-# Creating DigitalOcean Arch Linux Server using doctl
+# Creating A DigitalOcean Arch Linux Server using doctl
 
 ## In this tutorial you will:
 
@@ -13,7 +13,7 @@
 - Download the Arch Linux img file
   - Go to the [Arch Linux](https://gitlab.archlinux.org/archlinux/arch-boxes/-/packages/) site and click on the most recent images package. Once inside, you want to download the most recent "cloudimg" file which ends in "qcow2" and is around 500MiB in size. You will need this image file for later.
 
-![](Screenshot%202024-09-25%20at%2011.02.22%20PM%203.png)
+![](assets/Screenshot%202024-09-25%20at%2011.02.22%20PM%203.png)
 
 ## Step 1
 
@@ -84,11 +84,11 @@ Once you have doctl installed you will need to get get an API key from DigitalOc
 
 2. On the next screen name your token and for the expiration you can choose whichever option but for this tutorial we will do "No Expire". For the Scopes choose "Full Access" which will give us the options to read and write.
 
-![](Screenshot%202024-09-26%20at%201.05.25%20AM.png)
+![](assets/Screenshot%202024-09-26%20at%201.05.25%20AM.png)
 
 3. Once you have generated your token it is very important to copy this token to a safe place immediately as it will not be shown again. We will need this token to get secure access to the DigitalOcean API on doctl.
 
-![](Screenshot%202024-09-26%20at%201.05.53%20AM.png)
+![](assets/Screenshot%202024-09-26%20at%201.05.53%20AM.png)
 
 
 ### Get access to your DigitalOcean account on doctl
