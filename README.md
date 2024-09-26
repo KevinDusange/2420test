@@ -13,7 +13,7 @@
 - Download the Arch Linux img file
   - Go to the [Arch Linux](https://gitlab.archlinux.org/archlinux/arch-boxes/-/packages/) site and click on the most recent images package. Once inside, you want to download the most recent "cloudimg" file which ends in "qcow2" and is around 500MiB in size. You will need this image file for later.
 
-![[Screenshot 2024-09-25 at 11.02.22 PM.png]]
+![[Screenshot 2024-09-25 at 11.02.22 PM 1.png]]
 
 ## Step 1
 
