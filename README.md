@@ -66,7 +66,7 @@ brew install doctl
 
 Windows (PowerShell)
 ```
-What command goes here for Windows?
+sudo pacman -S doctl
 ```
 
 Once installed you can verify by typing the command below to show which version of doctl you currently have.
@@ -90,6 +90,7 @@ Once you have doctl installed you will need to get get an API key from DigitalOc
 
 ![](Screenshot%202024-09-26%20at%201.05.53%20AM.png)
 
+
 ### Get access to your DigitalOcean account on doctl
 
 On your operating system open your command line interface (Terminal or PowerShell) and type the command below. 
@@ -98,7 +99,7 @@ On your operating system open your command line interface (Terminal or PowerShel
 doctl auth init
 ```
 
-It will prompt you to enter the Token. Enter the token which you just created in the step above. This will grant doctl access to your DigitalOcean account. You are now ready to create a droplet on DigitalOcean using doctl. Before that, we will need to create a yaml file for initial cloud settings as we will provide this file when creating the droplet. 
+It will prompt you to enter the Token. Enter the token which you just created in the step above. Once completed it will show the token has been validated. This will grant doctl access to your DigitalOcean account. You are now ready to create a droplet on DigitalOcean using doctl. Before that, you will need to create a yaml file for initial cloud settings as you will need this file when creating the droplet. 
 ## Step 3
 
 ### Creating a cloud-init.yaml file
