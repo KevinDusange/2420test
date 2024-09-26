@@ -52,7 +52,7 @@ On Windows you may have to create a .ssh folder in your home directory if you do
 
 For this tutorial you will be using doctl to create your DigitalOcean droplet running Arch Linux. doctl is the official command line interface tool for DigitalOcean and will allow you to directly interact with the DigitalOcean API. Although more difficult, it offers greater flexibility for creating servers. 
 
-You can download doctl using the command(s) below.
+You can download doctl using the command(s) below. WRONG, DOWNLOAD IN ARCH LINUX
 
 You can use Homebrew for MacOS, which is a package manager for MacOS, which can be downloaded using the command below.
 ```
@@ -64,17 +64,30 @@ Once Homebrew is installed simply type the command below to download doctl for M
 brew install doctl
 ```
 
-Windows (PowerShell)
+In your Arch Linux server run the command:
 ```
 sudo pacman -S doctl
 ```
 
-Once installed you can verify by typing the command below to show which version of doctl you currently have.
+If this command does not run and gives you the following error: "failed to commit transaction (failed to retrieve some files) Errors occurred, no packages were upgraded". You may need to update the system using the command below, once updated, run the above command again.
+
+```
+sudo pacman -Syu
+```
+
+- sudo: runs the command using root privileges
+- pacman: the arch linux package manager
+- -Syu
+  - -S: syncs and installs packages
+  - -y: refreshes the packages
+  - -u: updates all packages to the most recent versions
+
+Once you have installed doctl you can verify by typing the command below to show which version you currently have installed.
 ```
 doctl version
 ```
 
-### Getting our API Key from DigitalOcean
+### Getting your API Key from DigitalOcean
 
 Once you have doctl installed you will need to get get an API key from DigitalOcean which will act as secure "login" with the DigitalOcean API on doctl. 
 
@@ -102,9 +115,9 @@ doctl auth init
 It will prompt you to enter the Token. Enter the token which you just created in the step above. Once completed it will show the token has been validated. This will grant doctl access to your DigitalOcean account. You are now ready to create a droplet on DigitalOcean using doctl. Before that, you will need to create a yaml file for initial cloud settings as you will need this file when creating the droplet. 
 ## Step 3
 
-### Creating a cloud-init.yaml file
+### Creating a cloud-init file
 
-Cloud-init is an initialization tool that helps with the initial user setup and it will run during when during the boot of the Droplet. 
+Cloud-init is an initialization tool that helps with the initial user setup and it will run during when during the boot of the Droplet. We will create a cloud-config.yaml file for the setup.
 
 
 
