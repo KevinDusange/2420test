@@ -47,9 +47,9 @@ This command will create 2 files in your .ssh directory
 >[!note] 
 On Windows you may have to create a .ssh folder in your home directory if you do not have one!
 
-Once you have the SSH keys created, you must now add the do-key.pub (public key) to your DigitalOcean account.
+Once you have the SSH keys created, you must now add the **`do-key.pub`** (public key) to your DigitalOcean account.
 
-To copy the do-key.pub type the command(s) below depending on your OS.
+To copy the **`do-key.pub`** type the command(s) below depending on your OS.
 
 For Windows (PowerShell)
 ```
@@ -61,7 +61,7 @@ For MacOS(Terminal)
 pbcopy < ~/.ssh/do-key.pub
 ```
 
-Login to your DigitalOcean account and on the left side of the page click the "Settings" option. Once inside settings, click the "Security" tab and then click on the "Add SSH Key" button. Paste the public key you just copied and give it a name.
+Login to your DigitalOcean account and on the left side of the page click the **Settings** option. Once inside settings, click the **Security** tab and then click on the **Add SSH Key** button. Paste the public key you just copied and give it a name.
 
 ![](assets/Screenshot%202024-09-26%20at%204.48.17%20PM.png)
 ## Step 2
@@ -70,11 +70,11 @@ Login to your DigitalOcean account and on the left side of the page click the "S
 
 Since we will need an existing droplet in order to create another droplet in doctl, we must first create a droplet on the DigitalOcean website. Before creating the droplet, we must first upload the Arch Linux image to DigitalOcean.
 
-1. On your DigitalOcean webpage, open the "Manage" dropdown menu on the left side of the screen and click the "Backups and Snapshots" option. Once on the Backups and Snapshots page, click on the "Custom Images" tab.
+1. On your DigitalOcean webpage, open the **Manage** dropdown menu on the left side of the screen and click the **Backups and Snapshots** option. Once on the Backups and Snapshots page, click on the **Custom Images** tab.
 
 ![](assets/Screenshot%202024-09-26%20at%204.56.07%20PM.png)
 
-2. Click the "Upload Image" button and under "Distribution" select "Arch Linux". The other setting you need to change is the datacenter region to "San Francisco 3" as it is a server on the west coast and it offers the latest technology and infrastructure (reference for this on digitalocean website).
+2. Click the **Upload Image** button and under **Distribution** select **Arch Linux**. The other setting you need to change is the datacenter region to **San Francisco 3** as it is a server on the west coast and it offers the latest technology and infrastructure (reference for this on digitalocean website).
 
 ![](assets/Screenshot%202024-09-26%20at%205.05.38%20PM.png)
 
@@ -85,7 +85,7 @@ Now that you have the Arch Linux cloud image uploaded to DigitalOcean we can now
 
 ### Creating a new droplet
 
-Now that you have uploaded your SSH key and the Arch Linux image, go back to your DigitalOcean dashboard and click the "Upload" button at the top of your screen. This should give you a drop down menu and the option we are interested in is "Droplets". On the droplets page there are some important settings you need to change.
+Now that you have uploaded your SSH key and the Arch Linux image, go back to your DigitalOcean dashboard and click the **Upload** button at the top of your screen. This should give you a drop down menu and the option we are interested in is **Droplets**. On the droplets page there are some important settings you need to change.
 
 - Settings
   - Choose Region: San Fransisco
@@ -94,6 +94,7 @@ Now that you have uploaded your SSH key and the Arch Linux image, go back to you
   - Choose Size:
     - Droplet Type: Basic
     - CPU Options: Choose either Intel or AMD (personal preference, both options are sufficient), and choose the $7/month option as you are just creating this droplet to learn about the process (you can destroy droplets anytime). 
+- Choose Authentication Method: Click SSH Key and choose the SSH key you made in the previous step
 - Hostname: Anything simple and short (ex ACIT2420)
 - Remaining settings can be left in their defaults
 
@@ -112,6 +113,8 @@ ssh -i .ssh/do-key arch@your-droplets-ip-address
 >[!Note]
 >Your terminal prompt should now say something like [arch@your-hostname ~ ]$
 
+### Installing some packages???
+
 ## Step 3
 
 ### Installing and configuring doctl
@@ -129,12 +132,12 @@ If this command does not run and gives you the following error: "failed to commi
 sudo pacman -Syu
 ```
 
-- sudo: runs the command using root privileges
-- pacman: the arch linux package manager
-- -Syu
-  - -S: syncs and installs packages
-  - -y: refreshes the packages
-  - -u: updates all packages to the most recent versions
+- **`sudo`**: runs the command using root privileges
+- **`pacman`**: the arch linux package manager
+- **`-Syu`**
+  - **`-S`**: syncs and installs packages
+  - **`-y`**: refreshes the packages
+  - **`-u`**: updates all packages to the most recent versions
 
 Once you have installed doctl you can verify by typing the command below to show which version you currently have installed.
 ```
@@ -145,11 +148,11 @@ doctl version
 
 Once you have doctl installed you will need to get get an API key from DigitalOcean which will act as secure "login" with the DigitalOcean API on doctl. 
 
-1. Login to DigitalOcean and on the left side of the homepage click the "API" button and under the "Tokens" tab click on "Generate New Token"
+1. Login to DigitalOcean and on the left side of the homepage click the **API** button and under the **Tokens** tab click on **Generate New Token**
 
 ![](Screenshot%202024-09-26%20at%201.09.58%20AM.png)
 
-2. On the next screen name your token and for the expiration you can choose whichever option but for this tutorial we will do "No Expire". For the Scopes choose "Full Access" which will give us the options to read and write.
+2. On the next screen name your token and for the expiration you can choose whichever option but for this tutorial we will do **No Expire**. For the Scopes choose **Full Access** which will give us the options to read and write.
 
 ![](assets/Screenshot%202024-09-26%20at%201.05.25%20AM.png)
 
@@ -166,12 +169,17 @@ On your operating system open your command line interface (Terminal or PowerShel
 doctl auth init
 ```
 
-It will prompt you to enter the Token. Enter the token which you just created in the step above. Once completed it will show the token has been validated. This will grant doctl access to your DigitalOcean account. You are now ready to create a droplet on DigitalOcean using doctl. Before that, you will need to create a yaml file for initial cloud settings as you will need this file when creating the droplet. 
+It will prompt you to enter the Token. Enter the token which you just created in the step above. Once completed it will show the token has been validated. This will grant doctl access to your DigitalOcean account (example validation below).
+
+![](assets/Screenshot%202024-09-26%20at%206.27.36%20PM.png)
+
+You are now almost ready to create a droplet on DigitalOcean using doctl. Before that, you will need to create a yaml file for initial cloud settings as you will need this file when creating the droplet. 
+
 ## Step 4
 
 ### Creating a cloud-init file
 
-Cloud-init is an initialization tool that helps with the initial user setup and it will run during when during the boot of the Droplet. We will create a cloud-config.yaml file for the setup.
+Cloud-init is a cloud initialization tool that helps with the initial user setup and it will run during when during the boot of the Droplet. The cloud-init tool comes setup with many Linux distros which is why in this case we downloaded the cloud image of Arch Linux. We will create a cloud-config.yaml file for the setup of cloud-init.
 
 
 
