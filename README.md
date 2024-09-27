@@ -8,6 +8,7 @@
 4. Create a cloud-init.yaml file
 5. Create a droplet using doctl 
 
+For Step 2 tell them to create project
 ### Requirements before beginning 
 
 - Create a DigitalOcean Account 
@@ -181,7 +182,21 @@ You are now almost ready to create a droplet on DigitalOcean using doctl. Before
 
 Cloud-init is a cloud initialization tool that helps with the initial user setup and it will run during when during the boot of the Droplet. The cloud-init tool comes setup with many Linux distros which is why in this case we downloaded the cloud image of Arch Linux. We will create a cloud-config.yaml file for the setup of cloud-init.
 
+To verify cloud-init is running you can run the command below.
 
+```
+systemctl status cloud-init
+```
+
+![](assets/Screenshot%202024-09-26%20at%207.04.15%20PM.png)
+
+To create the cloud-config.yaml file 
 
 ## Step 5
+
+### Creating a droplet using doctl
+
+After completing all of the above steps, you are finally ready to create a new droplet using the doctl CLI in your Arch Linux server.
+
+
 
