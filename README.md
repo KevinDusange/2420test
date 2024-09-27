@@ -98,6 +98,8 @@ Now that you have uploaded your SSH key and the Arch Linux image, go back to you
 - Choose Authentication Method: Click SSH Key and choose the SSH key you made in the previous step
 - Hostname: Anything simple and short (ex ACIT2420)
 - Remaining settings can be left in their defaults
+- We can also add a config file during this setup stage
+  - Near the bottom open **Advanced Options** and add the contents of your cloud config file.
 
 Once created you will see this droplet on your DigitalOcean dashboard with your hostname and the IP address like the example below. We can now use the IP address to connect to it.
 
@@ -113,6 +115,7 @@ ssh -i .ssh/do-key arch@your-droplets-ip-address
 
 >[!Note]
 >Your terminal prompt should now say something like [arch@your-hostname ~ ]$
+>To logout of your server simply type **`logout`** in the terminal.
 
 ### Installing some packages???
 
@@ -190,13 +193,63 @@ systemctl status cloud-init
 
 ![](assets/Screenshot%202024-09-26%20at%207.04.15%20PM.png)
 
-To create the cloud-config.yaml file 
+Once you have verified that cloud-init is active, it's now time to create the cloud-config.yaml file. You can create this file in the .ssh directory for easy remembering. To navigate to your .ssh directory use the command(s) below depending on your OS.
 
+Windows(PowerShell)
+```
+cd C:\Users\YourUsername\.ssh
+```
+
+MacOS(Terminal)
+```
+cd ~/.ssh
+```
+
+
+Once inside the .ssh directory, create the file using the command(s) below depending on your OS.
+
+Windows (PowerShell) (Is this correct)
+```
+echo #cloud-config > cloud-config.yaml
+```
+
+MacOS(Terminal)
+```
+touch cloud-config.yaml
+```
+
+Once the file has been created we can edit the contents using vim or any text editor on your OS. In this tutorial we will configure the file using the settings below.
+
+```
+#cloud-config
+hostname: my-droplet #change-me
+
+users:
+	name: user-name #change-me
+	primary-group: group-name #change-me
+	groups: 
+	sudo: ['ALL=(ALL) NOPASSWD:ALL']
+	shell: /bin/bash
+	ssh-authorized keys:
+		#your-public-key
+
+packages:
+	neovim
+	fd
+	less
+
+disable_root: true
+```
 ## Step 5
 
 ### Creating a droplet using doctl
 
 After completing all of the above steps, you are finally ready to create a new droplet using the doctl CLI in your Arch Linux server.
+
+
+## References
+
+
 
 
 
