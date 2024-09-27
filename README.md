@@ -154,7 +154,7 @@ Once you have doctl installed you will need to get get an API key from DigitalOc
 
 1. Login to DigitalOcean and on the left side of the homepage click the **API** button and under the **Tokens** tab click on **Generate New Token**
 
-![](Screenshot%202024-09-26%20at%201.09.58%20AM.png)
+![](assets/Screenshot%202024-09-26%20at%201.09.58%20AM%201.png)
 
 2. On the next screen name your token and for the expiration you can choose whichever option but for this tutorial we will do **No Expire**. For the Scopes choose **Full Access** which will give us the options to read and write.
 
