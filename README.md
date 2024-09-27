@@ -101,28 +101,24 @@ Once created you will see this droplet on your DigitalOcean dashboard with your 
 
 ![](assets/Screenshot%202024-09-26%20at%205.52.53%20PM.png)
 
+### Connecting to your droplet
 
+Once you have created your droplet, you can connect to it (via SSH) using the command below.
 
+```
+ssh -i .ssh/do-key arch@your-droplets-ip-address
+```
+
+>[!Note]
+>Your terminal prompt should now say something like [arch@your-hostname ~ ]$
 
 ## Step 3
 
 ### Installing and configuring doctl
 
-For this tutorial you will be using doctl to create your DigitalOcean droplet running Arch Linux. doctl is the official command line interface tool for DigitalOcean and will allow you to directly interact with the DigitalOcean API. Although more difficult, it offers greater flexibility for creating servers. 
+Now we will create another droplet using doctl. doctl is the official command line interface tool for DigitalOcean and will allow you to directly interact with the DigitalOcean API. Although more difficult, it offers greater flexibility for creating servers. 
 
-You can download doctl using the command(s) below. WRONG, DOWNLOAD IN ARCH LINUX
-
-You can use Homebrew for MacOS, which is a package manager for MacOS, which can be downloaded using the command below.
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-Once Homebrew is installed simply type the command below to download doctl for MacOS.
-```
-brew install doctl
-```
-
-In your Arch Linux server run the command:
+In your newly created Arch Linux server run the command:
 ```
 sudo pacman -S doctl
 ```
