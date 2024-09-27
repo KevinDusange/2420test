@@ -3,9 +3,10 @@
 ## In this tutorial you will:
 
 1. Create SSH Keys on your local machine
-2. Install and configure doctl
-3. Create a cloud-init.yaml file
-4. Create a droplet using doctl 
+2. Create a droplet on the DigitalOcean web console
+3. Install and configure doctl
+4. Create a cloud-init.yaml file
+5. Create a droplet using doctl 
 
 ### Requirements before beginning 
 
@@ -46,7 +47,41 @@ This command will create 2 files in your .ssh directory
 >[!note!] 
 On Windows you may have to create a .ssh folder in your home directory if you do not have one!
 
+Once you have the SSH keys created, you must now add the do-key.pub (public key) to your DigitalOcean account.
+
+To copy the do-key.pub type the command(s) below depending on your OS.
+
+For Windows (PowerShell)
+```
+Get-Content C:\Users\your-user-name\.ssh\do-key.pub | Set-Clipboard
+```
+
+For MacOS(Terminal)
+```
+pbcopy < ~/.ssh/do-key.pub
+```
+
+Login to your DigitalOcean account and on the left side of the page click the "Settings" option. Once inside settings, click the "Security" tab and then click on the "Add SSH Key" button. Paste the public key you just copied and give it a name.
+
+![](assets/Screenshot%202024-09-26%20at%204.48.17%20PM.png)
 ## Step 2
+
+### Creating a Droplet using the DigitalOcean web console
+
+Since we will need an existing droplet in order to create another droplet in doctl, we must first create a droplet on the DigitalOcean website. Before creating the droplet, we must first upload the Arch Linux image to DigitalOcean.
+
+1. On your DigitalOcean webpage, open the "Manage" dropdown menu on the left side of the screen and click the "Backups and Snapshots" option. Once on the Backups and Snapshots page, click on the "Custom Images" tab.
+
+![](assets/Screenshot%202024-09-26%20at%204.56.07%20PM.png)
+
+2. Click the "Upload Image" button and under "Distribution" select "Arch Linux". The other setting you need to change is the datacenter region to "San Francisco 3" as it is a server on the west coast and it offers the latest technology and infrastructure (reference for this on digitalocean website).
+
+![](assets/Screenshot%202024-09-26%20at%205.05.38%20PM.png)
+
+>[!Note!]
+>It may say "pending" for a while, just wait for this process to finish before heading on to the next step.
+
+## Step 3
 
 ### Installing and configuring doctl
 
@@ -113,7 +148,7 @@ doctl auth init
 ```
 
 It will prompt you to enter the Token. Enter the token which you just created in the step above. Once completed it will show the token has been validated. This will grant doctl access to your DigitalOcean account. You are now ready to create a droplet on DigitalOcean using doctl. Before that, you will need to create a yaml file for initial cloud settings as you will need this file when creating the droplet. 
-## Step 3
+## Step 4
 
 ### Creating a cloud-init file
 
@@ -121,5 +156,5 @@ Cloud-init is an initialization tool that helps with the initial user setup and 
 
 
 
-## Step 4
+## Step 5
 
