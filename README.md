@@ -20,9 +20,9 @@
 
 ### Create SSH keys on your local machine
 
-Before creating your droplet you will need to create an SSH key to connect to our Digital Ocean droplet. We will generate an ed25519 key which has a newer, more secure, and better performing algorithm compared to older RSA algorithm.
+Before creating your droplet you will need to create an SSH key to connect to our Digital Ocean droplet. We will generate an **`ed25519`** key which has a newer, more secure, and better performing algorithm compared to older RSA algorithm.
 
-To generate the ed25519 key type the command below in our terminal (on Linux/MacOS) or PowerShell (Windows).
+To generate the **`ed25519`** key type the command below in our terminal (on Linux/MacOS) or PowerShell (Windows).
 
 ```
 ssh-keygen -t ed25519 -f ~/.ssh/do-key -C "your email address"
@@ -38,11 +38,11 @@ Entering a passphrase (Optional): After creating the SSH key you will be asked t
 - To have a passphrase type your passphrase and press enter. It will ask you to type it again to confirm it.
 - To have no passphrase leave it empty and press enter twice.
 
-The "do-key" stands for DigitalOcean key for easy reminder but you can change the name of the key if you wish.
+The "**`do-key`**" stands for DigitalOcean key for easy reminder but you can change the name of the key if you wish.
 
 This command will create 2 files in your .ssh directory 
-- do-key (This is your private key)
-- do-key.pub (This is your public key which you will use to connect to your droplet)
+- **`do-key`** (This is your private key)
+- **`do-key.pub`** (This is your public key which you will use to connect to your droplet)
 
 >[!note!] 
 On Windows you may have to create a .ssh folder in your home directory if you do not have one!
@@ -80,6 +80,29 @@ Since we will need an existing droplet in order to create another droplet in doc
 
 >[!Note!]
 >It may say "pending" for a while, just wait for this process to finish before heading on to the next step.
+
+Now that you have the Arch Linux cloud image uploaded to DigitalOcean we can now proceed to the next step and create a new droplet.
+
+### Creating a new droplet
+
+Now that you have uploaded your SSH key and the Arch Linux image, go back to your DigitalOcean dashboard and click the "Upload" button at the top of your screen. This should give you a drop down menu and the option we are interested in is "Droplets". On the droplets page there are some important settings you need to change.
+
+- Settings
+  - Choose Region: San Fransisco
+  - Datacenter: San Fransisco - Datacenter 3 - SF03
+  - Choose an Image: Click the custom images tab and select the image you uploaded in the previous step
+  - Choose Size:
+    - Droplet Type: Basic
+    - CPU Options: Choose either Intel or AMD (personal preference, both options are sufficient), and choose the $7/month option as you are just creating this droplet to learn about the process (you can destroy droplets anytime). 
+- Hostname: Anything simple and short (ex ACIT2420)
+- Remaining settings can be left in their defaults
+
+Once created you will see this droplet on your DigitalOcean dashboard with your hostname and the IP address like the example below. We can now use the IP address to connect to it.
+
+![](assets/Screenshot%202024-09-26%20at%205.52.53%20PM.png)
+
+
+
 
 ## Step 3
 
