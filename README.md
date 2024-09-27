@@ -3,9 +3,9 @@
 ## In this tutorial you will:
 
 1. Create SSH Keys on your local machine
-2. Create a droplet on the DigitalOcean web console
-3. Install and configure doctl
-4. Create a cloud-init.yaml file
+2. Create a cloud-init file
+3. Create a droplet on the DigitalOcean web console
+4. Install and configure doctl
 5. Create a droplet using doctl 
 
 For Step 2 tell them to create project
@@ -67,6 +67,68 @@ Login to your DigitalOcean account and on the left side of the page click the **
 ![](assets/Screenshot%202024-09-26%20at%204.48.17%20PM.png)
 ## Step 2
 
+### Creating a cloud-init file
+
+Cloud-init is a cloud initialization tool that helps with the initial user setup and it will run during when during the boot of the Droplet. The cloud-init tool comes setup with many Linux distros which is why in this case we downloaded the cloud image of Arch Linux. We will create a cloud-config.yaml file for the setup of cloud-init.
+
+To create the cloud-config.yaml file. You can create this file in the .ssh directory for easy remembering. To navigate to your .ssh directory use the command(s) below depending on your OS.
+
+Windows(PowerShell)
+```
+cd C:\Users\YourUsername\.ssh
+```
+
+MacOS(Terminal)
+```
+cd ~/.ssh
+```
+
+Once inside the .ssh directory, create the file using the command(s) below depending on your OS.
+
+Windows (PowerShell) (Is this correct)
+```
+echo #cloud-config > cloud-config.yaml
+```
+
+MacOS (Terminal)
+```
+touch cloud-config.yaml
+```
+
+Once the file has been created we can edit the contents using vim or any text editor on your OS. In this tutorial we will configure the file using the settings below. The first line in the file should be #cloud-config to signal cloud-init that it is a cloud config file (Ellingwood, 2014).
+
+```
+#cloud-config
+users:
+	name: user-name #change-me
+	groups: sudo
+	sudo: ['ALL=(ALL) NOPASSWD:ALL']
+	shell: /bin/bash
+	ssh-authorized keys:
+		#your-public-key
+packages:
+	neovim
+	fd
+	less
+disable_root: true
+```
+```
+#cloud-config
+users:
+  - name: kevin
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsTV4MWsTql7pSe+5ELl9s02Hb85rYegWtSGVsVOc1J kevindusange@gmail.com
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    shell: /bin/bash
+packages:
+	neovim
+	fd
+	less
+disable_root: true
+```
+
+## Step 3
 ### Creating a Droplet using the DigitalOcean web console
 
 Since we will need an existing droplet in order to create another droplet in doctl, we must first create a droplet on the DigitalOcean website. Before creating the droplet, we must first upload the Arch Linux image to DigitalOcean.
@@ -117,13 +179,12 @@ ssh -i .ssh/do-key arch@your-droplets-ip-address
 >Your terminal prompt should now say something like [arch@your-hostname ~ ]$
 >To logout of your server simply type **`logout`** in the terminal.
 
-### Installing some packages???
 
-## Step 3
+## Step 4
 
 ### Installing and configuring doctl
 
-Now we will create another droplet using doctl. doctl is the official command line interface tool for DigitalOcean and will allow you to directly interact with the DigitalOcean API. Although more difficult, it offers greater flexibility for creating servers. 
+Now we will create another droplet using doctl. doctl is the official command line interface tool for DigitalOcean and will allow you to directly interact with the DigitalOcean API. Although more difficult, it offers greater flexibility for creating servers (DigitalOcean, 2020)
 
 In your newly created Arch Linux server run the command:
 ```
@@ -177,78 +238,51 @@ It will prompt you to enter the Token. Enter the token which you just created in
 
 ![](assets/Screenshot%202024-09-26%20at%206.27.36%20PM.png)
 
-You are now almost ready to create a droplet on DigitalOcean using doctl. Before that, you will need to create a yaml file for initial cloud settings as you will need this file when creating the droplet. 
-
-## Step 4
-
-### Creating a cloud-init file
-
-Cloud-init is a cloud initialization tool that helps with the initial user setup and it will run during when during the boot of the Droplet. The cloud-init tool comes setup with many Linux distros which is why in this case we downloaded the cloud image of Arch Linux. We will create a cloud-config.yaml file for the setup of cloud-init.
-
-To verify cloud-init is running you can run the command below.
-
-```
-systemctl status cloud-init
-```
-
-![](assets/Screenshot%202024-09-26%20at%207.04.15%20PM.png)
-
-Once you have verified that cloud-init is active, it's now time to create the cloud-config.yaml file. You can create this file in the .ssh directory for easy remembering. To navigate to your .ssh directory use the command(s) below depending on your OS.
-
-Windows(PowerShell)
-```
-cd C:\Users\YourUsername\.ssh
-```
-
-MacOS(Terminal)
-```
-cd ~/.ssh
-```
-
-
-Once inside the .ssh directory, create the file using the command(s) below depending on your OS.
-
-Windows (PowerShell) (Is this correct)
-```
-echo #cloud-config > cloud-config.yaml
-```
-
-MacOS(Terminal)
-```
-touch cloud-config.yaml
-```
-
-Once the file has been created we can edit the contents using vim or any text editor on your OS. In this tutorial we will configure the file using the settings below.
-
-```
-#cloud-config
-hostname: my-droplet #change-me
-
-users:
-	name: user-name #change-me
-	primary-group: group-name #change-me
-	groups: 
-	sudo: ['ALL=(ALL) NOPASSWD:ALL']
-	shell: /bin/bash
-	ssh-authorized keys:
-		#your-public-key
-
-packages:
-	neovim
-	fd
-	less
-
-disable_root: true
-```
+You are now ready to create a droplet on DigitalOcean using doctl.
 ## Step 5
 
 ### Creating a droplet using doctl
 
 After completing all of the above steps, you are finally ready to create a new droplet using the doctl CLI in your Arch Linux server.
 
+Inside of the Arch Linux server you just created, run the command below.
+```
+which command
+```
+
+Once inside you Arch Linux server, run the command below 
+
+```
+doctl compute droplet create \
+    --image 165084685 \
+    --size s-1vcpu-1gb-amd \
+    --ssh-keys ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsTV4MWsTql7pSe+5ELl9s02Hb85rYegWtSGVsVOc1J kevindusange@gmail.com
+    --region sfo3 \
+    --vpc-uuid e7afcdf5-a7ce-419e-95f8-bb8b2ed881e3 \
+    demo
+```
+```
+doctl compute droplet create demo2 --image 165084685 --region sfo3 --size s-1vcpu-1gb-amd --ssh-keys ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsTV4MWsTql7pSe+5ELl9s02Hb85rYegWtSGVsVOc1J kevindusange@gmail.com \
+```
+
+>[!Note]
+>You can use doctl compute commands to get more information about your droplets, create droplets, and manage them (DigitalOcean, 2024)
+>[doctl command reference](https://docs.digitalocean.com/reference/doctl/reference/compute/droplet/)
 
 
 ## References
+
+Ellingwood, J. (2014, October 13).  _An introduction to cloud-config scripting_. DigitalOcean. https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting
+
+Cloud-init. (n.d.). _Documentation overview_. Retrieved September 27, 2024, from [https://docs.cloud-init.io/en/latest/index.html](https://docs.cloud-init.io/en/latest/index.html)
+
+Ellingwood, J. (2014, October 13). _How to use cloud-config for your initial server setup_. DigitalOcean Community. Retrieved September 27, 2024, from [https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup](https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup)
+
+DigitalOcean. (2020, April 15). _doctl command reference_. Retrieved September 27, 2024, from [https://docs.digitalocean.com/reference/doctl/](https://docs.digitalocean.com/reference/doctl/)
+
+DigitalOcean. (2024, July 31). _doctl compute droplet reference_. Retrieved September 27, 2024, from [https://docs.digitalocean.com/reference/doctl/reference/compute/droplet/](https://docs.digitalocean.com/reference/doctl/reference/compute/droplet/)
+
+ArchWiki. (n.d.). _Cloud-init_. Retrieved September 27, 2024, from [https://wiki.archlinux.org/title/Cloud-init](https://wiki.archlinux.org/title/Cloud-init)
 
 
 
