@@ -44,7 +44,7 @@ This command will create 2 files in your .ssh directory
 - **`do-key`** (This is your private key)
 - **`do-key.pub`** (This is your public key which you will use to connect to your droplet)
 
->[!note!] 
+>[!note] 
 On Windows you may have to create a .ssh folder in your home directory if you do not have one!
 
 Once you have the SSH keys created, you must now add the do-key.pub (public key) to your DigitalOcean account.
@@ -78,7 +78,7 @@ Since we will need an existing droplet in order to create another droplet in doc
 
 ![](assets/Screenshot%202024-09-26%20at%205.05.38%20PM.png)
 
->[!Note!]
+>[!Note]
 >It may say "pending" for a while, just wait for this process to finish before heading on to the next step.
 
 Now that you have the Arch Linux cloud image uploaded to DigitalOcean we can now proceed to the next step and create a new droplet.
