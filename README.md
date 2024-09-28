@@ -245,30 +245,29 @@ You are now ready to create a droplet on DigitalOcean using doctl.
 
 After completing all of the above steps, you are finally ready to create a new droplet using the doctl CLI in your Arch Linux server.
 
-Inside of the Arch Linux server you just created, run the command below. This will show your ssh-keys and their corresponding 
+Inside of the Arch Linux server you just created, run the command below. This will show your ssh-keys and their corresponding FingerPrint. Note the fingerprint and copy it somewhere as we will need it in the next step.
 ```
 doctl compute ssh-key list
 ```
 
-This will show your ssh-keys and their corresponding
+![](assets/Screenshot%202024-09-27%20at%205.59.50%20PM.png)
 
-Once inside you Arch Linux server, run the command below 
+You will also need to get your Arch Linux image number
 
+Now, run the command below to create the droplet.
 ```
-doctl compute droplet create \
-    --image 165084685 \
-    --size s-1vcpu-1gb-amd \
-    --ssh-keys ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsTV4MWsTql7pSe+5ELl9s02Hb85rYegWtSGVsVOc1J kevindusange@gmail.com
-    --region sfo3 \
-    --vpc-uuid e7afcdf5-a7ce-419e-95f8-bb8b2ed881e3 \
-    demo
-```
-```
-doctl compute droplet create demo2 --image 165084685 --region sfo3 --size s-1vcpu-1gb-amd --ssh-keys ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsTV4MWsTql7pSe+5ELl9s02Hb85rYegWtSGVsVOc1J kevindusange@gmail.com \
+doctl compute droplet create --region sfo3 --image <your-Arch-Linux-image-number> --size s-1vcpu-1gb-amd --ssh-keys <your-SSH-key-FingerPrint>  <choose-droplet-name>
 ```
 
-doctl compute droplet create --region sfo3 --image 165084685 --size s-1vcpu-1gb-amd --ssh-keys 42:84:06:61:fc:fb:a7:f5:5e:d8:58:a7:3b:2a:2e:16  doctl-demo
+It should look something like this.
+![](assets/Screenshot%202024-09-27%20at%206.09.11%20PM.png)
 
+To confirm you can also type the command below to show a list of your current created droplets.
+```
+doctl compute droplet list
+```
+
+Congratulations! You should now have 2 droplets, one created from the DigitalOcean web console, and one created using doctl.
 
 >[!Note]
 >You can use doctl compute commands to get more information about your droplets, create droplets, and manage them (DigitalOcean, 2024)
