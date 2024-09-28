@@ -252,7 +252,7 @@ doctl compute ssh-key list
 
 ![](assets/Screenshot%202024-09-27%20at%205.59.50%20PM.png)
 
-You will also need to get your Arch Linux image number
+You will also need to get your Arch Linux image number which you can get from **Creating** a droplet then selecting your Arch Linux image and then click **Create via command line** near the bottom of your screen and then click the **doctl** option. It will give you the Arch Linux image number which you will need for the command below.
 
 Now, run the command below to create the droplet.
 ```
