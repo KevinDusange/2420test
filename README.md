@@ -245,10 +245,12 @@ You are now ready to create a droplet on DigitalOcean using doctl.
 
 After completing all of the above steps, you are finally ready to create a new droplet using the doctl CLI in your Arch Linux server.
 
-Inside of the Arch Linux server you just created, run the command below.
+Inside of the Arch Linux server you just created, run the command below. This will show your ssh-keys and their corresponding 
 ```
-which command
+doctl compute ssh-key list
 ```
+
+This will show your ssh-keys and their corresponding
 
 Once inside you Arch Linux server, run the command below 
 
@@ -264,6 +266,9 @@ doctl compute droplet create \
 ```
 doctl compute droplet create demo2 --image 165084685 --region sfo3 --size s-1vcpu-1gb-amd --ssh-keys ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsTV4MWsTql7pSe+5ELl9s02Hb85rYegWtSGVsVOc1J kevindusange@gmail.com \
 ```
+
+doctl compute droplet create --region sfo3 --image 165084685 --size s-1vcpu-1gb-amd --ssh-keys 42:84:06:61:fc:fb:a7:f5:5e:d8:58:a7:3b:2a:2e:16  doctl-demo
+
 
 >[!Note]
 >You can use doctl compute commands to get more information about your droplets, create droplets, and manage them (DigitalOcean, 2024)
