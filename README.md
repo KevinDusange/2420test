@@ -111,22 +111,7 @@ packages:
 	fd
 	less
 disable_root: true
-```
-```
-#cloud-config
-users:
-  - name: kevin
-    ssh-authorized-keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsTV4MWsTql7pSe+5ELl9s02Hb85rYegWtSGVsVOc1J kevindusange@gmail.com
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    groups: sudo
-    shell: /bin/bash
-packages:
-	neovim
-	fd
-	less
-disable_root: true
-```
+``````
 
 ## Step 3
 ### Creating a Droplet using the DigitalOcean web console
@@ -252,7 +237,7 @@ doctl compute ssh-key list
 
 ![](assets/Screenshot%202024-09-27%20at%205.59.50%20PM.png)
 
-You will also need to get your Arch Linux image number which you can get from **Creating** a droplet then selecting your Arch Linux image and then click **Create via command line** near the bottom of your screen and then click the **doctl** option. It will give you the Arch Linux image number which you will need for the command below.
+You will also need to get your Arch Linux image number which you can get from **Creating** a droplet then selecting your Arch Linux image and then click **Create via command line** near the bottom of your screen and then click the **doctl** option. It will give you the Arch Linux image number in the command line which you will need for the command below.
 
 Now, run the command below to create the droplet.
 ```
