@@ -8,7 +8,6 @@
 4. Install and configure doctl
 5. Create a droplet using doctl 
 
-For Step 2 tell them to create project
 ### Requirements before beginning 
 
 - Create a DigitalOcean Account 
